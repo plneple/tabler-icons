@@ -9,14 +9,14 @@ const componentTemplate = ({
   children
 }) => `\
 import createReactNativeComponent from '../createReactNativeComponent';
-export default createReactNativeComponent('${type}', '${name}', '${namePascal}', ${JSON.stringify(children)});`;
+export const Icon${namePascal} = createReactNativeComponent('${type}', '${name}', '${namePascal}', ${JSON.stringify(children)});`;
 
 const indexItemTemplate = ({
   name,
   namePascal
-}) => `export { default as Icon${namePascal} } from './Icon${namePascal}';`
+}) => `export { Icon${namePascal} } from './Icon${namePascal}';`
 
-const aliasTemplate = ({ fromPascal, toPascal }) => `export { default as Icon${fromPascal} } from './icons/Icon${toPascal}';\n`
+const aliasTemplate = ({ fromPascal, toPascal }) => `export { Icon${toPascal} as Icon${fromPascal} } from './icons/Icon${toPascal}';\n`
 
 buildJsIcons({
   name: 'icons-react-native',
