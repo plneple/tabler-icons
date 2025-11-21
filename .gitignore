@@ -37,4 +37,5 @@ packages/icons*/icons/*
 
 !/**/.gitkeep
 *.tgz
+!icons-react-native.tgz
 .env
