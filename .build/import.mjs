@@ -1,4 +1,4 @@
-import { readFileSync, existsSync, writeFileSync } from 'fs'
+import fs from 'fs'
 import { glob } from 'glob'
 import { resolve, basename } from 'path'
 import { HOME_DIR, optimizeSVG, iconTemplate, types } from './helpers.mjs'
@@ -7,7 +7,7 @@ types.forEach(type => {
   const files = glob.sync(resolve(HOME_DIR, `./new/${type}/*.svg`))
 
   files.forEach(function (file, i) {
-    let fileData = readFileSync(file).toString(),
+    let fileData = fs.readFileSync(file).toString(),
       filename = basename(file, '.svg')
 
     console.log(`${type}/${filename}`)

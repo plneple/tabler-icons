@@ -8,16 +8,10 @@ import {
 
 const componentTemplate = ({ type, name, namePascal, children }) => `\
 import createReactComponent from '../createReactComponent';
-import { IconNode } from '../types';
-
-export const __iconNode: IconNode = ${JSON.stringify(children)}
-
-const Icon${namePascal} = createReactComponent('${type}', '${name}', '${namePascal}', __iconNode);
-
-export default Icon${namePascal};`;
+export default createReactComponent('${type}', '${name}', '${namePascal}', ${JSON.stringify(children)});`;
 
 const indexItemTemplate = ({ name, namePascal }) =>
-  `export { default as Icon${namePascal} } from './Icon${namePascal}';`;
+  `export { default as ${namePascal} } from './${namePascal}';`;
 
 const aliasTemplate = ({ fromPascal, toPascal }) =>
   `export { default as Icon${fromPascal} } from './icons/Icon${toPascal}';\n`;

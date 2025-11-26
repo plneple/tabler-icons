@@ -19,7 +19,7 @@ extensions.forEach(function (extension) {
 
       if (categoryOriginal || tagsOriginal) {
 
-        let data = readFileSync(file).toString()
+        let data = fs.readFileSync(file).toString()
         data = data.replace(/(\<\!--[\s\S]+?-->)/, function (m, headerContent) {
           console.log('categoryOriginal', fileOriginal, categoryOriginal && categoryOriginal[1], tagsOriginal && tagsOriginal[1])
 

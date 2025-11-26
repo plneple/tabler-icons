@@ -1,17 +1,11 @@
 import { visualizer } from 'rollup-plugin-visualizer'
 import license from 'rollup-plugin-license'
 import esbuild from 'rollup-plugin-esbuild'
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import bundleSize from '@atomico/rollup-plugin-sizes';
 
 const getRollupPlugins = (pkg, minify) => {
   return [
     esbuild({
       minify
-    }),
-    nodeResolve({
-      extensions: ['.js', '.ts', '.jsx', '.tsx'],
-      // resolveOnly: [/^@tabler\/.*$/],
     }),
     license({
       banner: `@license ${pkg.name} v${pkg.version} - ${pkg.license}
@@ -19,7 +13,6 @@ const getRollupPlugins = (pkg, minify) => {
 This source code is licensed under the ${pkg.license} license.
 See the LICENSE file in the root directory of this source tree.`
     }),
-    bundleSize(),
     visualizer({
       sourcemap: false,
       filename: `stats/${pkg.name}${minify ? '-min' : ''}.html`
@@ -29,22 +22,11 @@ See the LICENSE file in the root directory of this source tree.`
 
 export const getRollupConfig = (pkg, outputFileName, bundles, globals) => {
   return bundles
-    .map(({
-      inputs,
-      format,
-      minify,
-      preserveModules,
-      outputDir = 'dist',
-      extension = 'js',
-      exports = 'named',
-      outputFile,
-      external = [],
-      paths
-    }) => {
+    .map(({ inputs, format, minify, preserveModules, outputDir = 'dist', extension = 'js', exports = 'named' }) => {
       return inputs.map(input => ({
         input,
         plugins: getRollupPlugins(pkg, minify),
-        external: [...Object.keys(globals), ...external],
+        external: Object.keys(globals),
         output: {
           name: pkg.name,
           ...(preserveModules
@@ -53,15 +35,14 @@ export const getRollupConfig = (pkg, outputFileName, bundles, globals) => {
               entryFileNames: `[name].${extension}`,
             }
             : {
-              file: outputFile ?? `${outputDir}/${format}/${outputFileName}${minify ? '.min' : ''}.${extension}`,
+              file: `${outputDir}/${format}/${outputFileName}${minify ? '.min' : ''}.${extension}`,
             }),
           format,
           sourcemap: true,
           preserveModules,
           preserveModulesRoot: 'src',
-          globals,
           exports,
-          paths
+          globals,
         },
       }))
     })

@@ -23,12 +23,11 @@ const bundles = [
 export default [
   {
     input: inputs[0],
-    output: [
-      {
-        file: `dist/${outputFileName}.d.ts`,
-        format: 'es',
-      },
-    ],
+    output: [{
+      file: `dist/esm/${outputFileName}.d.ts`, format: 'esm'
+    }, {
+      file: `dist/cjs/${outputFileName}.d.cts`, format: 'cjs'
+    }],
     plugins: [
       dts({
         compilerOptions: {
