@@ -18,31 +18,10 @@
     "directory": "packages/icons-react-native"
   },
   "type": "module",
-  "main": "./dist/cjs/tabler-icons-react-native.cjs",
-  "types": "./dist/cjs/tabler-icons-react-native.d.cts",
-  "module": "./dist/esm/tabler-icons-react-native.mjs",
-  "amdName": "TablerIconsReactNative",
-  "react-native": "./dist/esm/tabler-icons-react-native.mjs",
   "exports": {
-    ".": {
-      "require": {
-        "types": "./dist/cjs/tabler-icons-react-native.d.cts",
-        "default": "./dist/cjs/tabler-icons-react-native.cjs"
-      },
-      "import": {
-        "types": "./dist/esm/tabler-icons-react-native.d.ts",
-        "default": "./dist/esm/tabler-icons-react-native.mjs"
-      }
-    },
     "./*": {
-      "require": {
-        "types": "./dist/cjs/icons/*.d.cts",
-        "default": "./dist/cjs/icons/*.cjs"
-      },
-      "import": {
-        "types": "./dist/esm/icons/*.d.ts",
-        "default": "./dist/esm/icons/*.mjs"
-      }
+      "types": "./*.d.ts",
+      "default": "./*.mjs"
     }
   },
   "sideEffects": false,
