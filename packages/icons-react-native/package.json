@@ -19,9 +19,9 @@
   },
   "type": "module",
   "exports": {
-    "./*": {
-      "types": "./*.d.ts",
-      "default": "./*.mjs"
+    "./icons/*": {
+      "types": "./icons/*.d.ts",
+      "default": "./icons/*.mjs"
     }
   },
   "sideEffects": false,
